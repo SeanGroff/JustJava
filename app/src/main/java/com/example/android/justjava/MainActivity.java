@@ -5,6 +5,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
+import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import java.text.NumberFormat;
@@ -24,18 +26,58 @@ public class MainActivity extends ActionBarActivity {
   }
 
   /**
+   * gets the checked state for the whipped cream checkbox
+   * @return true or false
+   */
+  private boolean addWhippedCream() {
+    CheckBox whippedCreamCheckBox = (CheckBox) findViewById(R.id.whipped_cream_checkbox);
+    return whippedCreamCheckBox.isChecked();
+  }
+
+  /**
+   * gets the checked state for the chocolate checkbox
+   * @return true or false
+   */
+  private boolean addChocolate() {
+    CheckBox chocolateCheckBox = (CheckBox) findViewById(R.id.chocolate_checkbox);
+    return chocolateCheckBox.isChecked();
+  }
+
+  /**
+   * Gets the text from the EditText input
+   * @return String
+   */
+  private String getName() {
+    EditText nameInput = (EditText) findViewById(R.id.name_input);
+    return nameInput.getText().toString();
+  }
+
+  /**
    * This method is called when the order button is clicked.
    */
   public void submitOrder(View view) {
-    Intent intent = new Intent(Intent.ACTION_SENDTO);
-    intent.setData(Uri.parse("mailto:"));
-    intent.putExtra(Intent.EXTRA_SUBJECT, "Do you love Java?");
-    intent.putExtra(Intent.EXTRA_TEXT, "This is the body of the email, order Java!!");
-    if (intent.resolveActivity(getPackageManager()) != null) {
-      startActivity(intent);
+//    displayMessage(orderSummary());
+    Intent emailIntent = new Intent(Intent.ACTION_SENDTO);
+    emailIntent.setData(Uri.parse("mailto:"));
+    emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Coffee Order Summary");
+    emailIntent.putExtra(Intent.EXTRA_TEXT, orderSummary());
+
+    if (emailIntent.resolveActivity(getPackageManager()) != null) {
+      startActivity(emailIntent);
     }
-//    String priceMessage = "Total: $" + (quantity*coffeeCost) + "\nThank you!";
-//    displayMessage(priceMessage);
+  }
+
+  /**
+   * Formats and gathers the order summary date into an output String
+   * @return String
+   */
+  private String orderSummary() {
+    return "Name: " + getName() +
+        "\nAdd whipped cream? " + addWhippedCream() +
+        "\nAdd chocolate? " + addChocolate() +
+        "\nQuantity: " + quantity +
+        "\nTotal: $" + (quantity*coffeeCost) +
+        "\nThank you!";
   }
 
   public void increment(View view) {

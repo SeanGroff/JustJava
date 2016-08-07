@@ -11,12 +11,40 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.android.justjava.MainActivity">
 
+    <EditText
+        android:id="@+id/name_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Name"
+        android:inputType="text"/>
+
     <TextView
+        android:paddingBottom="16dp"
+        android:paddingTop="16dp"
+        android:text="Toppings"
+        style="@style/HeaderTextStyle"/>
+
+    <CheckBox
+        android:id="@+id/whipped_cream_checkbox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:paddingLeft="24dp"
+        android:text="Whipped cream"
+        android:textSize="16sp"/>
+
+    <CheckBox
+        android:id="@+id/chocolate_checkbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="24dp"
+        android:text="Chocolate"
+        android:textSize="16sp"/>
+
+    <TextView
         android:paddingBottom="16dp"
+        android:paddingTop="16dp"
         android:text="quantity"
-        android:textAllCaps="true"/>
+        style="@style/HeaderTextStyle"/>
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -49,12 +77,10 @@
     </LinearLayout>
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:paddingBottom="16dp"
         android:paddingTop="16dp"
-        android:text="price"
-        android:textAllCaps="true"/>
+        android:text="Order Summary"
+        style="@style/HeaderTextStyle"/>
 
     <TextView
         android:id="@+id/price_text_view"
